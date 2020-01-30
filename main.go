@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-latest/lib"
+	"github.com/matang28/go-latest/lib"
 	"os"
 	"regexp"
 )
