@@ -30,7 +30,7 @@ and you want to upgrade all dependencies that matches `github.com/some/dep1` you
 $> go-latest "dep1" .
 ```
 
-will change the go.mod file to:
+and the `go.mod` file will be changed to:
 ```
 module github.com/my/module
 
