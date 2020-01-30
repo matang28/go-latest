@@ -1,5 +1,6 @@
 # Go Latest
 ![Build](https://github.com/matang28/go-latest/workflows/Go-Latest%20Test/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/matang28/go-latest)](https://goreportcard.com/report/github.com/matang28/go-latest)
 
 
 A simple tool that updates go.mod dependencies to their latest version.  
