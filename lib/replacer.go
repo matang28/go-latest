@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-func ReplaceVersion(file *GoModFile, pattern *regexp.Regexp, with string) bool {
+func replaceVersion(file *GoModFile, pattern *regexp.Regexp, with string) bool {
 	var anyMatched = false
 
 	for idx := range file.Requirements {

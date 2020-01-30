@@ -23,7 +23,7 @@ replace github.com/bla2/bla2 => github.com/bla2/bla2 v0.0.0-20190910155135-963c2
 
 	expr := regexp.MustCompile("github.com/bla1")
 
-	match := ReplaceVersion(file, expr, "latest")
+	match := replaceVersion(file, expr, "latest")
 	assert.True(t, match)
 	assert.EqualValues(t, "latest", file.Requirements[0].Version)
 	assert.EqualValues(t, "latest", file.Replacements[0].ToModule.Version)
@@ -46,6 +46,6 @@ replace github.com/bla2/bla2 => github.com/bla2/bla2 v0.0.0-20190910155135-963c2
 
 	expr := regexp.MustCompile("github.com/matang28")
 
-	match := ReplaceVersion(file, expr, "latest")
+	match := replaceVersion(file, expr, "latest")
 	assert.False(t, match)
 }

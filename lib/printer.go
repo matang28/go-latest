@@ -12,27 +12,33 @@ var errColorItal = color.New(color.FgHiRed).Add(color.Italic).Add(color.Bold)
 var infColor = color.New(color.FgWhite)
 var headerColor = color.New(color.FgYellow).Add(color.Underline)
 
+// Prints a formatted error
 func PrintError(message string) {
 	errColor.Println(message)
 }
 
+// Prints a formatted command
 func PrintErrorCommand(message string) {
 	errColorItal.Print(message)
 }
 
+// Prints a formatted error and exit with non-zero status code
 func PrintErrorPanic(message string) {
 	errColor.Println(message)
 	os.Exit(1)
 }
 
+// Prints a formatted info message
 func PrintInfo(message string) {
 	infColor.Println(message)
 }
 
+// Prints a formatted header
 func PrintHeader(message string) {
 	headerColor.Println(message)
 }
 
+// Prints a go.mod file from the struct representation of the go.mod file
 func PrintGoModFile(file GoModFile) string {
 	sb := strings.Builder{}
 	sb.WriteString(fmt.Sprintf("module %s\n", file.Module))

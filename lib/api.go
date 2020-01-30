@@ -7,15 +7,17 @@ import (
 	"regexp"
 )
 
-const Latest = "latest"
+const latest = "latest"
 
+// This function will run go-latest logic against the provided root path
+// and compiled regex pattern
 func GoLatest(rootPath string, pattern *regexp.Regexp) {
-	paths, err := DiscoverModFiles(rootPath)
+	paths, err := discoverModFiles(rootPath)
 	if err != nil {
 		PrintErrorPanic(fmt.Sprintf("Failed to discover mod files on path: %s with error: %s", rootPath, err.Error()))
 	}
 
-	files := LoadFiles(paths)
+	files := loadFiles(paths)
 	for _, file := range files {
 		PrintHeader(fmt.Sprintf(`File: "%s":`, file.Path))
 		if file.Error != nil {
@@ -31,7 +33,7 @@ func GoLatest(rootPath string, pattern *regexp.Regexp) {
 			continue
 		}
 
-		if ReplaceVersion(modFile, pattern, Latest) {
+		if replaceVersion(modFile, pattern, latest) {
 			PrintInfo(fmt.Sprintf(`  * Will try to write the patched go.mod file to "%s".`, file.Path))
 			newContent := []byte(PrintGoModFile(*modFile))
 			err := ioutil.WriteFile(file.Path, newContent, os.ModePerm)

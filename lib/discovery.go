@@ -8,27 +8,27 @@ import (
 	"strings"
 )
 
-type ModFileContent struct {
+type modFileContent struct {
 	Content []byte
 	Path    string
 	Error   error
 }
 
-func LoadFiles(paths []string) []ModFileContent {
-	var out []ModFileContent
+func loadFiles(paths []string) []modFileContent {
+	var out []modFileContent
 	for _, path := range paths {
 		content, err := ioutil.ReadFile(path)
 		if err != nil {
-			out = append(out, ModFileContent{Error: err, Path: path})
+			out = append(out, modFileContent{Error: err, Path: path})
 		} else {
-			out = append(out, ModFileContent{Content: content, Path: path, Error: nil})
+			out = append(out, modFileContent{Content: content, Path: path, Error: nil})
 		}
 	}
 
 	return out
 }
 
-func DiscoverFilesByExt(rootPath string, fileSuffix string) ([]string, error) {
+func discoverFilesByExt(rootPath string, fileSuffix string) ([]string, error) {
 	var out []string
 	err := filepath.Walk(rootPath, func(path string, info os.FileInfo, err error) error {
 		if info == nil {
@@ -47,6 +47,6 @@ func DiscoverFilesByExt(rootPath string, fileSuffix string) ([]string, error) {
 	return out, err
 }
 
-func DiscoverModFiles(rootPath string) ([]string, error) {
-	return DiscoverFilesByExt(rootPath, "go.mod")
+func discoverModFiles(rootPath string) ([]string, error) {
+	return discoverFilesByExt(rootPath, "go.mod")
 }

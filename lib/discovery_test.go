@@ -8,7 +8,7 @@ import (
 )
 
 func TestDiscoverFilesByExt_FoundModFiles(t *testing.T) {
-	files, err := DiscoverFilesByExt(filepath.Join("..", "test_data"), "go.mod")
+	files, err := discoverFilesByExt(filepath.Join("..", "test_data"), "go.mod")
 	assert.Nil(t, err)
 	assert.NotNil(t, files)
 
@@ -23,13 +23,13 @@ func TestDiscoverFilesByExt_NotFoundModFiles(t *testing.T) {
 	pwd, err := os.Getwd()
 	assert.Nil(t, err)
 
-	files, err := DiscoverFilesByExt(pwd, "go.mod")
+	files, err := discoverFilesByExt(pwd, "go.mod")
 	assert.Nil(t, err)
 	assert.Empty(t, files)
 }
 
 func TestDiscoverFilesByExt_InvalidPath(t *testing.T) {
-	files, err := DiscoverFilesByExt("/madeup/path/to/nothing", "go.mod")
+	files, err := discoverFilesByExt("/madeup/path/to/nothing", "go.mod")
 	assert.NotNil(t, err)
 	assert.Empty(t, files)
 }
