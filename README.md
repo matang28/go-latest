@@ -1,10 +1,13 @@
 # Go Latest
-A simple tool that updates go.mod dependencies to their latest version.
+![Build](https://github.com/matang28/go-latest/workflows/Go-Latest%20Test/badge.svg)
+
+
+A simple tool that updates go.mod dependencies to their latest version.  
 
 ## How to get it?
 Simply install it using `go get`:
 ```
-$> go get github.com/matang28/go-latest
+$> go get -u github.com/matang28/go-latest
 ```
 
 ## How to use it?
