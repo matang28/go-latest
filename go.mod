@@ -1,4 +1,4 @@
-module go-latest
+module github.com/matang28/go-latest
 
 go 1.13
 
