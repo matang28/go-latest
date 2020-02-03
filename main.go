@@ -1,13 +1,18 @@
 package main
 
 import (
+	"flag"
 	"github.com/matang28/go-latest/lib"
 	"os"
 	"regexp"
 )
 
+var tidyFlag = flag.Bool("tidy", false, "adding this flag will run go mod tidy on detected files")
+
 func main() {
-	args := os.Args[1:]
+	args := os.Args[1:3]
+	os.Args = os.Args[2:]
+	flag.Parse()
 
 	if len(args) != 2 {
 		lib.PrintError(`GoLatest expects exactly 2 arguments: "go-latest "<MATCH EXPRESSION>" <ROOT FOLDER>". For example:`)
@@ -28,5 +33,9 @@ func main() {
 
 	pattern := regexp.MustCompile(patternStr)
 
-	lib.GoLatest(rootFolder, pattern)
+	files := lib.GoLatest(rootFolder, pattern)
+
+	if *tidyFlag {
+		lib.GoTidy(files)
+	}
 }

@@ -25,7 +25,7 @@ type Statement struct {
 // A struct that represents a go.mod dependency
 type Dependency struct {
 	ModuleName string  `@String`
-	Version    string  `@Version`
+	Version    string  `(@Version | @"latest")`
 	Comment    *string `("//" @String)?`
 }
 

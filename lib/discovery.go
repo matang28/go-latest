@@ -8,20 +8,20 @@ import (
 	"strings"
 )
 
-type modFileContent struct {
+type ModFileContent struct {
 	Content []byte
 	Path    string
 	Error   error
 }
 
-func loadFiles(paths []string) []modFileContent {
-	var out []modFileContent
+func loadFiles(paths []string) []ModFileContent {
+	var out []ModFileContent
 	for _, path := range paths {
 		content, err := ioutil.ReadFile(path)
 		if err != nil {
-			out = append(out, modFileContent{Error: err, Path: path})
+			out = append(out, ModFileContent{Error: err, Path: path})
 		} else {
-			out = append(out, modFileContent{Content: content, Path: path, Error: nil})
+			out = append(out, ModFileContent{Content: content, Path: path, Error: nil})
 		}
 	}
 

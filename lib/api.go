@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"regexp"
+	"sync"
 )
 
 const latest = "latest"
 
 // This function will run go-latest logic against the provided root path
 // and compiled regex pattern
-func GoLatest(rootPath string, pattern *regexp.Regexp) {
+func GoLatest(rootPath string, pattern *regexp.Regexp) []ModFileContent {
 	paths, err := discoverModFiles(rootPath)
 	if err != nil {
 		PrintErrorPanic(fmt.Sprintf("Failed to discover mod files on path: %s with error: %s", rootPath, err.Error()))
@@ -47,4 +49,24 @@ func GoLatest(rootPath string, pattern *regexp.Regexp) {
 
 		fmt.Println()
 	}
+
+	return files
+}
+
+func GoTidy(files []ModFileContent) {
+	PrintHeader("Running go mod tidy:")
+	wg := &sync.WaitGroup{}
+	for _, file := range files {
+		go func(path string) {
+			resp, err := goModTidy(filepath.Dir(path))
+			if err != nil {
+				PrintError(fmt.Sprintf(`  * Failed to run go mod tidy on: %s with error: %s\n%s`, path, err.Error(), resp))
+			} else {
+				PrintInfo(fmt.Sprintf(`  * %s - OK`, file.Path))
+			}
+			wg.Done()
+		}(file.Path)
+		wg.Add(1)
+	}
+	wg.Wait()
 }
