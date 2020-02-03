@@ -6,11 +6,11 @@ import (
 )
 
 func TestLexerInit(t *testing.T) {
-	expected := []string{"EOF", "Parentheses", "Arrow", "String"}
+	expected := []string{"EOF", "Parentheses", "Arrow", "String", "Version"}
 	m := iniLexer.Symbols()
 
 	assert.NotNil(t, m)
-	assert.EqualValues(t, 4, len(m))
+	assert.EqualValues(t, 5, len(m))
 
 	for k := range m {
 		assert.Contains(t, expected, k)

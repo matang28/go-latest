@@ -5,8 +5,9 @@ import (
 )
 
 var iniLexer = lexer.Must(lexer.Regexp(
-	`(\s+)` +
+	`([\s\n\r\t]+)` +
 		`|(?P<Parentheses>[\(\)])` +
 		`|(?P<Arrow>(=>))` +
-		`|(?P<String>[a-zA-Z0-9_\-\.\/\\]*)`,
+		`|(?P<Version>[v][a-zA-Z0-9_\+\.@\-\/]+)` +
+		`|(?P<String>[a-zA-Z0-9_\+\.@\-\/]+)`,
 ))
