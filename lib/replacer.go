@@ -10,10 +10,10 @@ func replaceVersion(file *GoModFile, pattern *regexp.Regexp, with string) bool {
 
 	for idx := range file.Requirements {
 		if pattern.MatchString(file.Requirements[idx].ModuleName) {
-			file.Requirements[idx].Version = with
-			anyMatched = true
 			PrintInfo(fmt.Sprintf(`  * Replacing "%s" from version "%s" to version "%s" (require)`,
 				file.Requirements[idx].ModuleName, file.Requirements[idx].Version, with))
+			file.Requirements[idx].Version = with
+			anyMatched = true
 		}
 	}
 
