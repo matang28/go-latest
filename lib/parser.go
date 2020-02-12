@@ -31,7 +31,7 @@ type Dependency struct {
 
 // A struct that represents a replace directive
 type Replacement struct {
-	FromModule string     `@String "=>"`
+	FromModule string     `@String Version? "=>"`
 	ToModule   Dependency `@@`
 }
 
